@@ -23,6 +23,7 @@ install() ->
 	%% application:stop(mnesia),
 	rpc:multicall(Node,application,stop,[mnesia]),
 	ok.
+%%========================== Client APi ==================================
 
 start_link() ->
 	gen_server:start_link({local,?MODULE},?MODULE,[],[]).
@@ -45,7 +46,7 @@ delete(Id) ->
 search(Content) ->
 	gen_server:call(?MODULE,{search,Content}).
 
-%%=============================================================
+%%========================== Server API ===================================
 init([]) ->
 	process_flag(trap_exit,true),
 	{ok,#state{}}.
@@ -91,7 +92,7 @@ terminate(_Reason,_State) ->
 
 code_change(_OldVsn,State,_Extra) -> {ok,State}.
 
-%%============================================================
+%%=========================== Private Functions =================================
 
 get_list() ->
 	Query = fun() ->
