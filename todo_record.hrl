@@ -1,0 +1,1 @@
+-record(todo,{id,content,status,created}).
